@@ -1,61 +1,80 @@
 #include <stdio.h>
-#include <stdlib.h> // for system()
-
 
 
 int menu() {
-    int a;
+    int choice;
     printf("\nMenu:\n");
     printf("1. Insert\n");
     printf("2. Delete\n");
     printf("3. Display\n");
     printf("4. Exit\n");
     printf("Enter your choice: ");
-    scanf("%d", &a);
-    return a;
+    scanf("%d", &choice);
+    return choice;
 }
 
-void pause() {
-    system("pause"); // Windows only
+void arrayBoxes(char arr[], int sizeOfArray, int indexOfArray) {
+    for (int i = 0; i < sizeOfArray; i++) {
+        printf("+-----");
+    }
+    printf("+\n");
+
+    for (int i = 0; i < sizeOfArray; i++) {
+        if (i < indexOfArray) {
+            printf("|  %c  ", arr[i]);
+        } else {
+            printf("|     ");
+        }
+    }
+    printf("|\n");
+
+    for (int i = 0; i < sizeOfArray; i++) {
+        printf("+-----");
+    }
+    printf("+\n");
+}
+
+int insert(int indexOfArray, char arr[],int sizeOfArray) {
+    char ch;
+    if (indexOfArray < sizeOfArray) {
+        printf("Enter character to insert: ");
+        scanf(" %c", &ch);  // space before %c to consume leftover newline
+        arr[indexOfArray] = ch;
+        printf("Inserted '%c'\n", ch);
+        return indexOfArray + 1;
+    } else {
+        printf("Array is full.\n");
+        return indexOfArray;
+    }
+}
+
+int deletation(int indexOfArray, char arr[]) {
+    if (indexOfArray > 0) {
+        printf("Deleted '%c'\n", arr[indexOfArray - 1]);
+        return indexOfArray - 1;
+    } else {
+        printf("Array is empty.\n");
+        return indexOfArray;
+    }
 }
 
 int main() {
-    char arr[5];
-    int count = 0;
     int choice;
-    char ch;
+    char arr[5];
+    int indexOfArray = 0;
+    const int sizeOfArray = 5;
 
     do {
         choice = menu();
         switch (choice) {
-            case 1: // Insert
-                if (count < 5) {
-                    printf("Enter character to insert: ");
-                    scanf(" %c", &ch);
-                    arr[count++] = ch;
-                    printf("Inserted '%c'\n", ch);
-                } else {
-                    printf("Array is full.\n");
-                }
+            case 1:
+                indexOfArray = insert(indexOfArray, arr, sizeOfArray);
                 break;
-            case 2: // Delete
-                if (count > 0) {
-                    printf("Deleted '%c'\n", arr[count - 1]);
-                    count--;
-                } else {
-                    printf("Array is empty.\n");
-                }
+            case 2:
+                indexOfArray = deletation(indexOfArray, arr);
                 break;
-            case 3: // Display
-                if (count == 0) {
-                    printf("Array is empty.\n");
-                } else {
-                    printf("Array contents: ");
-                    for (int i = 0; i < count; i++) {
-                        printf("%c ", arr[i]);
-                    }
-                    printf("\n");
-                }
+            case 3:
+                arrayBoxes(arr, sizeOfArray, indexOfArray);
                 break;
             case 4:
                 printf("Exiting...\n");
@@ -63,10 +82,6 @@ int main() {
             default:
                 printf("Invalid choice.\n");
         }
-
-        if (choice != 4)
-            pause();
-
     } while (choice != 4);
 
     return 0;
