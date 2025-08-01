@@ -15,7 +15,10 @@ int menu () {
     printf("3. Display \n");
     printf("4. Exit\n");
     printf("Enter your choice: ");
-    scanf("%d" , &choice);
+    if (scanf("%d", &choice) !=1) {
+        printf("Invalid input. Please enter a number between 1 and 4.\n");
+        return 4;
+    }
     return choice;
 }
 
@@ -35,6 +38,10 @@ void insert_Q() {
     }
 }
 void delete_Q() {
+
+    if (rear == 0) {
+        printf("Queue is empty\n");
+    }
     if (front == rear) {
         front = 0;
         rear = 0;
@@ -45,21 +52,40 @@ void delete_Q() {
 
 void display_Q() {
     int i;
-    for (i = 0; i <= sizeOfQueue; i++) {
+
+    // Print top border
+    for (i = 0; i < sizeOfQueue; i++) {
         printf("+----");
     }
     printf("+\n");
 
-    for (i = 0; i <= sizeOfQueue; i++) {
-        printf("|    ");
+    // Print queue elements or blanks
+    if (front == 0) {
+        // Queue is empty — print all blanks
+        for (i = 0; i < sizeOfQueue; i++) {
+            printf("|    ");
+        }
+    } else {
+        // Print elements between front and rear
+        for (i = 1; i <= sizeOfQueue; i++) {
+            if (i >= front && i <= rear) {
+                // Print element at zero-based index i-1
+                printf("| %c  ", q[i]);
+            } else {
+                printf("|    ");
+            }
+        }
     }
-    printf("|+\n");
+    printf("|\n");
 
-    for (i = 0; i <= sizeOfQueue; i++) {
+    // Print bottom border
+    for (i = 0; i < sizeOfQueue; i++) {
         printf("+----");
     }
     printf("+\n");
 }
+
+
 
 int main () {
     int choice;

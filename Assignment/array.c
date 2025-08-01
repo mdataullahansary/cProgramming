@@ -1,6 +1,10 @@
 #include <stdio.h>
     char arr[5];
     int indexOfArray = 0;
+    int choice;
+
+
+
     const int sizeOfArray = 5;
 
 int menu() {
@@ -11,7 +15,12 @@ int menu() {
     printf("3. Display\n");
     printf("4. Exit\n");
     printf("Enter your choice: ");
-    scanf("%d", &choice);
+    if (scanf("%d", &choice) !=1) {
+
+        printf("Invalid input. Please enter a number between 1 and 4.\n");
+        return 4;
+
+    }
     return choice;
 }
 
@@ -68,22 +77,25 @@ void main() {
 
     do {
         choice = menu();
-        switch (choice) {
-            case 1:
-                insert();
-                break;
-            case 2:
-                deletion();
-                break;
-            case 3:
-                display();
-                break;
-            case 4:
-                printf("Exiting...\n");
-                break;
-            default:
-                printf("Invalid choice.\n");
-        }
+
+            switch (choice) {
+                case 1:
+                    insert();
+                    break;
+                case 2:
+                    deletion();
+                    break;
+                case 3:
+                    display();
+                    break;
+                case 4:
+                    printf("Exiting...\n");
+                    break;
+
+                default:
+                    printf("Invalid choice.\n");
+            }
+
     } while (choice != 4);
 
 }

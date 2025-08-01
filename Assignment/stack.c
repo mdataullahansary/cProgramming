@@ -1,21 +1,27 @@
 #include <stdio.h>
-    char st[5];
-    const int sizeOfStack= 5;
-    int top = 0;
+char st[5];
+const int sizeOfStack= 5;
+int top = 0;
 
 
 void display_stack( ) {
     int i;
-      for ( i = 0; i <= sizeOfStack-top; i++) {
-        printf("|   |\n");
+    for ( i = 0; i < sizeOfStack-top; i++) {
+
         printf("+---+\n");
+        printf("|   |\n");
 
     }
 
     for (i = top; i > 0; i--) {
+        printf("+---+\n");
         printf("| %c |\n", st[i]);
+
     }
     printf("+---+\n");
+
+
+
 }
 
 int menu () {
@@ -26,11 +32,16 @@ int menu () {
     printf("3. Display \n");
     printf("4. Exit\n");
     printf("Enter your choice: ");
-    scanf("%d" , &choice);
+    if (scanf("%d", &choice) !=1) {
+
+        printf("Invalid input. Please enter a number between 1 and 4.\n");
+        return 4;
+
+    }
     return choice;
 }
 
-   void push ( ) {
+void push ( ) {
     char c;
     if (top == sizeOfStack) {
         printf("Stack is full\n");
@@ -42,7 +53,7 @@ int menu () {
         printf("\n Pushed %c \n", c);
     }
 }
-int pop ( ) {
+void pop ( ) {
     if (top != 0 ) {
         printf("\n Popped : %c\n", st[top]);
 
@@ -55,29 +66,30 @@ int pop ( ) {
 
 
 void main() {
-int choice;
-printf("\n\n  Implementation of Stack Operations  \n");
-
-   do {
-       choice = menu();
-       switch (choice) {
-           case 1:
-               push( );
-               break;
-           case 2:
-               top=pop( );
-               break;
-           case 3:
-               display_stack( );
-               break;
-           case 4:
-               printf("Exiting...\n");
-               break;
-           default:
-               printf("Invalid choice.\n");
-               break;
-       }
-       } while (choice != 4);
+    int choice;
+    printf("\n\n  Implementation of Stack \n Size of Stack : 05 \n");
 
 
-   }
+    do {
+        choice = menu();
+        switch (choice) {
+            case 1:
+                push( );
+                break;
+            case 2:
+                pop( );
+                break;
+            case 3:
+                display_stack( );
+                break;
+            case 4:
+                printf("Exiting...\n");
+                break;
+            default:
+                printf("Invalid choice.\n");
+                break;
+        }
+    } while (choice != 4);
+
+
+}
