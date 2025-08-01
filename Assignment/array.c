@@ -1,5 +1,7 @@
 #include <stdio.h>
-
+    char arr[5];
+    int indexOfArray = 0;
+    const int sizeOfArray = 5;
 
 int menu() {
     int choice;
@@ -13,13 +15,14 @@ int menu() {
     return choice;
 }
 
-void arrayBoxes(char arr[], int sizeOfArray, int indexOfArray) {
-    for (int i = 0; i < sizeOfArray; i++) {
+void display( ) {
+int i;
+    for ( i = 0; i < sizeOfArray; i++) {
         printf("+-----");
     }
     printf("+\n");
 
-    for (int i = 0; i < sizeOfArray; i++) {
+    for ( i = 0; i < sizeOfArray; i++) {
         if (i < indexOfArray) {
             printf("|  %c  ", arr[i]);
         } else {
@@ -28,53 +31,52 @@ void arrayBoxes(char arr[], int sizeOfArray, int indexOfArray) {
     }
     printf("|\n");
 
-    for (int i = 0; i < sizeOfArray; i++) {
+    for ( i = 0; i < sizeOfArray; i++) {
         printf("+-----");
     }
     printf("+\n");
 }
 
-int insert(int indexOfArray, char arr[],int sizeOfArray) {
+void insert( ) {
     char ch;
     if (indexOfArray < sizeOfArray) {
         printf("Enter character to insert: ");
-        scanf(" %c", &ch);  // space before %c to consume leftover newline
+        scanf(" %c", &ch);
         arr[indexOfArray] = ch;
         printf("Inserted '%c'\n", ch);
-        return indexOfArray + 1;
+        indexOfArray= indexOfArray + 1;
     } else {
         printf("Array is full.\n");
-        return indexOfArray;
     }
 }
 
-int deletation(int indexOfArray, char arr[]) {
+void deletion ( ) {
     if (indexOfArray > 0) {
         printf("Deleted '%c'\n", arr[indexOfArray - 1]);
-        return indexOfArray - 1;
+        indexOfArray = indexOfArray - 1;
     } else {
         printf("Array is empty.\n");
-        return indexOfArray;
+
     }
 }
 
-int main() {
+void main() {
     int choice;
-    char arr[5];
-    int indexOfArray = 0;
-    const int sizeOfArray = 5;
+
+    printf("\n\n  Implementation of Array Operations  \n");
+
 
     do {
         choice = menu();
         switch (choice) {
             case 1:
-                indexOfArray = insert(indexOfArray, arr, sizeOfArray);
+                insert();
                 break;
             case 2:
-                indexOfArray = deletation(indexOfArray, arr);
+                deletion();
                 break;
             case 3:
-                arrayBoxes(arr, sizeOfArray, indexOfArray);
+                display();
                 break;
             case 4:
                 printf("Exiting...\n");
@@ -84,5 +86,4 @@ int main() {
         }
     } while (choice != 4);
 
-    return 0;
 }

@@ -5,7 +5,12 @@ set(CMAKE_C_STANDARD 11)
 
 add_executable(cProgramming main.c
         pattern01.c
-        array.c
+        Assignment/array.c
         matrix.c
         alternatesterzero.c
-        stack.c)
+        Assignment/stack.c
+        pattern03.c
+        spiral.c
+        Assignment/queue.c
+        pactices/matrix01.c
+)
